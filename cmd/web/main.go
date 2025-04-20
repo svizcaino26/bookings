@@ -2,14 +2,14 @@ package main
 
 import (
 	"fmt"
-	"go_learning/pkg/config"
-	"go_learning/pkg/handlers"
-	"go_learning/pkg/render"
 	"log"
 	"net/http"
 	"time"
 
 	"github.com/alexedwards/scs/v2"
+	"github.com/svizcaino26/bookings/pkg/config"
+	"github.com/svizcaino26/bookings/pkg/handlers"
+	"github.com/svizcaino26/bookings/pkg/render"
 )
 
 const portNumber = ":8080"

@@ -2,12 +2,13 @@ package render
 
 import (
 	"bytes"
-	"go_learning/pkg/config"
-	"go_learning/pkg/models"
 	"html/template"
 	"log"
 	"net/http"
 	"path/filepath"
+
+	"github.com/svizcaino26/bookings/pkg/config"
+	"github.com/svizcaino26/bookings/pkg/models"
 )
 
 var app *config.AppConfig

@@ -1,9 +1,10 @@
 package main
 
 import (
-	"go_learning/pkg/config"
-	"go_learning/pkg/handlers"
 	"net/http"
+
+	"github.com/svizcaino26/bookings/pkg/config"
+	"github.com/svizcaino26/bookings/pkg/handlers"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"

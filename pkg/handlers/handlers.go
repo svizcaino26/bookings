@@ -1,10 +1,11 @@
 package handlers
 
 import (
-	"go_learning/pkg/config"
-	"go_learning/pkg/models"
-	"go_learning/pkg/render"
 	"net/http"
+
+	"github.com/svizcaino26/bookings/pkg/config"
+	"github.com/svizcaino26/bookings/pkg/models"
+	"github.com/svizcaino26/bookings/pkg/render"
 )
 
 // Repo the repository used by the handlers
