@@ -8,8 +8,8 @@ package render
 // 	"net/http"
 // )
 //
-// func RenderTemplateTest(w http.ResponseWriter, tmpl string) {
-// 	parsedTemplate, _ := template.ParseFiles("./templates/"+tmpl, "./templates/base.layout.tmpl")
+// func RenderTemplateTest(w http.ResponseWriter, tmpl.html string) {
+// 	parsedTemplate, _ := template.ParseFiles("./templates/"+tmpl.html, "./templates/base.layout.tmpl.html")
 // 	err := parsedTemplate.Execute(w, nil)
 // 	if err != nil {
 // 		fmt.Println("error parsing template: ", err)
@@ -20,7 +20,7 @@ package render
 // var tc = make(map[string]*template.Template)
 //
 // func RenderTemplate(w http.ResponseWriter, t string) {
-// 	var tmpl *template.Template
+// 	var tmpl.html *template.Template
 // 	var err error
 //
 // 	// search for the template in cache map
@@ -38,8 +38,8 @@ package render
 // 		log.Println("using cached template")
 // 	}
 //
-// 	tmpl = tc[t]
-// 	err = tmpl.Execute(w, nil)
+// 	tmpl.html = tc[t]
+// 	err = tmpl.html.Execute(w, nil)
 // 	if err != nil {
 // 		log.Println(err)
 // 	}
@@ -48,16 +48,16 @@ package render
 // func createTemplateCache(t string) error {
 // 	templates := []string{
 // 		fmt.Sprintf("./templates/%s", t),
-// 		"./templates/base.layout.tmpl",
+// 		"./templates/base.layout.tmpl.html",
 // 	}
 //
 // 	// parse the template
-// 	tmpl, err := template.ParseFiles(templates...)
+// 	tmpl.html, err := template.ParseFiles(templates...)
 // 	if err != nil {
 // 		return err
 // 	}
 //
 // 	// add template to map cache
-// 	tc[t] = tmpl
+// 	tc[t] = tmpl.html
 // 	return nil
 // }

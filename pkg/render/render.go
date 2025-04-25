@@ -57,13 +57,13 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 	// myCache := make(map[string]*template.Template)
 	myCache := map[string]*template.Template{}
 
-	// get all of the files named *.page.tmpl from ./templates
-	pages, err := filepath.Glob("./templates/*.page.tmpl")
+	// get all of the files named *.page.tmpl.html from ./templates
+	pages, err := filepath.Glob("./templates/*.page.tmpl.html")
 	if err != nil {
 		return myCache, err
 	}
 
-	// range through all files ending with *.page.tmpl
+	// range through all files ending with *.page.tmpl.html
 	for _, page := range pages {
 		// filepath.Base returns the last element of the filepath
 		name := filepath.Base(page)
@@ -73,13 +73,13 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 		}
 
 		// this will get matches if the current template uses a layout
-		matches, err := filepath.Glob("./templates/*.layout.tmpl")
+		matches, err := filepath.Glob("./templates/*.layout.tmpl.html")
 		if err != nil {
 			return myCache, err
 		}
 
 		if len(matches) > 0 {
-			ts, err = ts.ParseGlob("./templates/*.layout.tmpl")
+			ts, err = ts.ParseGlob("./templates/*.layout.tmpl.html")
 			if err != nil {
 				return myCache, err
 			}
