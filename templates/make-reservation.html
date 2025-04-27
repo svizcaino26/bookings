@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-  <title>Reservation</title>
+  <title>Make Reservation</title>
   <link href="css/style.css" rel="stylesheet">
   <style>
     .my-footer {
@@ -63,27 +63,27 @@
   <!-- Main container starts here -->
   <div class="container">
     <div class="row">
-      <div class="col-6 offset-3">
-        <h1 class="mt-5">Search for availability</h1>
-        <!-- Form starts here -->
-        <form action="reservation.html" method="GET">
-          <div class="row">
-            <div class="mb-3 col">
-              <label for="start_date" class="form-label">Starting date</label>
-              <input required type="date" class="form-control" id="start_date" name="start_date"
-                aria-describedby="startDateHelp">
-              <div id="start_date" class="form-text">Enter starting date in the form YYYY-MM-DD</div>
-            </div>
-            <div class="mb-3 col">
-              <label for="ending_date" class="form-label">Ending date</label>
-              <input required type="date" class="form-control" id="ending_date" name="ending_date"
-                aria-describedby="endingDateHelp">
-              <div id="ending_date" class="form-text">Enter ending date in the form YYYY-MM-DD</div>
-            </div>
+      <div class="col">
+        <h1>Make Reservation</h1>
+        <form method="post" action="" class="needs-validation" novalidate>
+          <div class="form-group mt-5">
+            <label for="first_name">First name:</label>
+            <input type="text" class="form-control" name="first_name" id="first_name" autocomplete="off" required>
           </div>
-          <button type="submit" class="btn btn-primary">Search availability</button>
+          <div class="form-group">
+            <label for="last_name">Last name:</label>
+            <input type="text" class="form-control" name="last_name" id="last_name" autocomplete="off" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" name="email" id="email" autocomplete="off" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input type="text" class="form-control" name="phone" id="phone" autocomplete="off" required>
+          </div>
+          <input type="submit" class="btn btn-primary" value="Make Reservation">
         </form>
-        <!-- Form ends here -->
       </div>
     </div>
   </div>
