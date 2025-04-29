@@ -8,21 +8,8 @@
     integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/css/datepicker-bs5.min.css">
   <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
+  <link href="../static/css/styles.css" rel="stylesheet">
   <title>Reservation</title>
-  <link href="css/style.css" rel="stylesheet">
-  <style>
-    .my-footer {
-      heigt: 5em;
-      background-color: #163B65;
-      margin-top: 2.5em;
-      padding: 1em;
-      color: #FFFFFF;
-    }
-
-    .room-image {
-      max-width: 50%;
-    }
-  </style>
 </head>
 
 <body>
@@ -229,7 +216,7 @@
             const rp = new DateRangePicker(elem, {
               // ...options
               format: "yyyy-mm-dd",
-              showOnFocus: false,
+              showOnFocus: true,
             });
           },
           preConfirm: () => {
@@ -237,6 +224,10 @@
               document.getElementById("start").value,
               document.getElementById("end").value
             ];
+          },
+          didOpen: () => {
+            document.querySelector("#start").removeAttribute("disabled");
+            document.querySelector("#end").removeAttribute("disabled");
           }
         });
         if (formValues) {
@@ -257,10 +248,10 @@
         <form id="check-availability-form" method="post" action="" class="needs-validation" novalidate>
           <div class="row" id="reservation-dates-modal">
             <div class="col">
-              <input class="form-control" id="start" type="text" name="start" placeholder="Arrival" required>
+              <input disabled class="form-control" id="start" type="text" name="start" placeholder="Arrival" required>
             </div>
             <div class="col">
-              <input class="form-control" id="end" type="text" name="end" placeholder="Departure" required>
+              <input disabled class="form-control" id="end" type="text" name="end" placeholder="Departure" required>
             </div>
           </div>
         </form>
