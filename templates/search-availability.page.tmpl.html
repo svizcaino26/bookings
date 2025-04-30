@@ -1,0 +1,26 @@
+{{template "base" .}}
+
+{{define "content"}}
+<!-- Main container starts here -->
+<div class="container">
+  <div class="row">
+    <div class="col-6 offset-3">
+      <h1 class="mt-5">Search for availability</h1>
+      <!-- Form starts here -->
+      <form action="" method="post" class="needs-validation" novalidate>
+        <div class="row" id="reservation-dates">
+          <div class="col">
+            <input class="form-control" type="text" name="start" placeholder="Arrival" required>
+          </div>
+          <div class="col">
+            <input class="form-control" type="text" name="end" placeholder="Departure" required>
+          </div>
+        </div>
+        <hr>
+        <button type="submit" class="btn btn-primary">Search availability</button>
+      </form>
+      <!-- Form ends here -->
+    </div>
+  </div>
+</div>
+{{end}}

@@ -12,6 +12,6 @@
     max-width: 50%;
   }
 
-  .datepicker {
-    z-index: -1000;
+  .datepicker-main {
+    z-index: 10000;
   }
