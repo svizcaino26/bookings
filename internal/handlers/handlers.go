@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/svizcaino26/bookings/internal/config"
+	"github.com/svizcaino26/bookings/internal/forms"
 	"github.com/svizcaino26/bookings/internal/models"
 	"github.com/svizcaino26/bookings/internal/render"
 )
@@ -53,9 +54,12 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+// GET METHOD HANDLERS
 // Reservation renders the make a reservation page and displays form
 func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, r, "make-reservation.page.tmpl.html", &models.TemplateData{})
+	render.RenderTemplate(w, r, "make-reservation.page.tmpl.html", &models.TemplateData{
+		Form: forms.New(nil),
+	})
 }
 
 // Generals renders the room page
@@ -73,14 +77,13 @@ func (m *Repository) Availability(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, r, "search-availability.page.tmpl.html", &models.TemplateData{})
 }
 
-// Availability renders the room page
+// Contact renders the contact page
 func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, r, "contact.page.tmpl.html", &models.TemplateData{})
 }
 
-// Availability renders the room page
-func (m *Repository) Book(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, r, "make-reservation.page.tmpl.html", &models.TemplateData{})
+func (m *Repository) Htmx(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, r, "htmx.page.tmpl.html", &models.TemplateData{})
 }
 
 // POST HANDLERS
@@ -110,4 +113,33 @@ func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
 	log.Println(string(out))
 	w.Header().Set("Content-Type", "application/json")
 	fmt.Fprintf(w, "%s", out)
+}
+
+// PostReservation handles the posting of a make rservation form
+func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	reservation := models.Reservation{
+		FirstName: r.Form.Get("first_name"),
+		Lastname:  r.Form.Get("last_name"),
+		Email:     r.Form.Get("email"),
+		Phone:     r.Form.Get("phone"),
+	}
+
+	form := forms.New(r.PostForm)
+
+	form.Has("first_name", r)
+
+	if !form.Valid() {
+		data := make(map[string]any)
+		data["reservation"] = reservation
+
+		render.RenderTemplate(w, r, "make-reservation.page.tmpl.html", &models.TemplateData{
+			Form: form,
+			Data: data,
+		})
+	}
 }
