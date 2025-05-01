@@ -5,20 +5,21 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <img src="/static/images/generals-quarters.png" class="room-image img-fluid img-thumbnail d-block mx-auto" alt="room image">
+      <img src="/static/images/generals-quarters.png" class="room-image img-fluid img-thumbnail d-block mx-auto"
+        alt="room image">
     </div>
   </div>
   <div class="row">
     <div class="col">
       <h1 class="text-center mt-4">General's Quarters</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipiscing elit. 
-            Quisque faucibus ex sapien vitae pellentesque sem placerat. 
-            In id cursus mi pretium tellus duis convallis. 
-            Tempus leo eu aenean sed diam urna tempor. 
-            Pulvinar vivamus fringilla lacus nec metus bibendum egestas. 
-            Iaculis massa nisl malesuada lacinia integer nunc posuere. 
-            Ut hendrerit semper vel class aptent taciti sociosqu. 
-            Ad litora torquent per conubia nostra inceptos himenaeos.</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipiscing elit.
+        Quisque faucibus ex sapien vitae pellentesque sem placerat.
+        In id cursus mi pretium tellus duis convallis.
+        Tempus leo eu aenean sed diam urna tempor.
+        Pulvinar vivamus fringilla lacus nec metus bibendum egestas.
+        Iaculis massa nisl malesuada lacinia integer nunc posuere.
+        Ut hendrerit semper vel class aptent taciti sociosqu.
+        Ad litora torquent per conubia nostra inceptos himenaeos.</p>
     </div>
   </div>
   <div class="row">
@@ -32,7 +33,7 @@
 
 {{define "js"}}
 <script>
-  document.querySelector("#check-availability-button").addEventListener("click", function(){
+  document.querySelector("#check-availability-button").addEventListener("click", function () {
     let html = `
       <form id="check-availability-form" method="post" action="" class="needs-validation" novalidate>
         <div class="row" id="reservation-dates-modal">
@@ -45,7 +46,38 @@
         </div>
       </form>
     `
-    attention.custom({msg: html, title: "Select dates"});
+    attention.custom({
+      msg: html,
+      title: "Select dates",
+      willOpen: () => {
+        // Rangepicker call
+        const elem = document.getElementById('reservation-dates-modal');
+        const rp = new DateRangePicker(elem, {
+          // ...options
+          format: "yyyy-mm-dd",
+          showOnFocus: true,
+        });
+      },
+      didOpen: () => {
+        document.querySelector("#start").removeAttribute("disabled");
+        document.querySelector("#end").removeAttribute("disabled");
+      },
+      callback: function (result) {
+        let form = document.querySelector("#check-availability-form");
+        let formData = new FormData(form);
+        formData.append("csrf_token", "{{.CSRFToken}}");
+
+        fetch("/search-availability-json", {
+          method: "post",
+          body: formData,
+        })
+          .then(response => response.json())
+          .then(data => {
+            alert(data.ok);
+            alert(data.message);
+          })
+      }
+    });
   })
 </script>
 {{end}}
