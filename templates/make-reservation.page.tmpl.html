@@ -5,6 +5,7 @@
   <div class="row">
     <div class="col">
       <h1 id="page_title">Make Reservation</h1>
+      {{$res := index .Data "reservation"}}
       <form method="post" action="" class="" novalidate>
         <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
         <div class="form-group mt-5">
@@ -13,19 +14,31 @@
           <label class="text-danger">{{.}}</label>
           {{end}}
           <input type="text" class='form-control {{with .Form.Errors.Get "first_name"}} is-invalid{{end}}'
-            name="first_name" id="first_name" autocomplete="off" required>
+            name="first_name" value="{{$res.FirstName}}" id="first_name" autocomplete="off" required>
         </div>
         <div class="form-group">
           <label for="last_name">Last name:</label>
-          <input type="text" class="form-control" name="last_name" id="last_name" autocomplete="off" required>
+          {{with .Form.Errors.Get "last_name"}}
+          <label class="text-danger">{{.}}</label>
+          {{end}}
+          <input type="text" class='form-control {{with .Form.Errors.Get "last_name"}} is-invalid{{end}}'
+            name="last_name" value="{{$res.LastName}}" id="last_name" autocomplete="off" required>
         </div>
         <div class="form-group">
           <label for="email">Email:</label>
-          <input type="email" class="form-control" name="email" id="email" autocomplete="off" required>
+          {{with .Form.Errors.Get "email"}}
+          <label class="text-danger">{{.}}</label>
+          {{end}}
+          <input type="email" class='form-control {{with .Form.Errors.Get "email"}} is-invalid{{end}}'
+            name="email" value="{{$res.Email}}" id="email" autocomplete="off" required>
         </div>
         <div class="form-group">
           <label for="phone">Phone:</label>
-          <input type="text" class="form-control" name="phone" id="phone" autocomplete="off" required>
+          {{with .Form.Errors.Get "phone"}}
+          <label class="text-danger">{{.}}</label>
+          {{end}}
+          <input type="text" class='form-control {{with .Form.Errors.Get "phone"}} is-invalid{{end}}'
+            name="phone" value="{{$res.Phone}}" id="phone" autocomplete="off" required>
         </div>
         <input type="submit" class="btn btn-primary" value="Make Reservation">
       </form>
