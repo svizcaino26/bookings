@@ -17,7 +17,7 @@ func routes(app *config.AppConfig) http.Handler {
 	mux.Use(NoSurf)
 	mux.Use(SessionLoad)
 
-	// Get Routes
+	// [GET ROUTES]
 	mux.Get("/", handlers.Repo.Home)
 	mux.Get("/about", handlers.Repo.About)
 	mux.Get("/generals-quarters", handlers.Repo.Generals)
@@ -26,8 +26,9 @@ func routes(app *config.AppConfig) http.Handler {
 	mux.Get("/contact", handlers.Repo.Contact)
 	mux.Get("/make-reservation", handlers.Repo.Reservation)
 	mux.Get(("/htmx"), handlers.Repo.Htmx)
+	mux.Get("/reservation-summary", handlers.Repo.ReservationSummary)
 
-	// POST Routes
+	// [POST ROUTES]
 	mux.Post("/search-availability", handlers.Repo.PostAvailability)
 	mux.Post("/search-availability-json", handlers.Repo.AvailabilityJSON)
 	mux.Post("/make-reservation", handlers.Repo.PostReservation)
