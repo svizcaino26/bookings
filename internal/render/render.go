@@ -2,6 +2,7 @@ package render
 
 import (
 	"bytes"
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -12,7 +13,10 @@ import (
 	"github.com/svizcaino26/bookings/internal/models"
 )
 
-var app *config.AppConfig
+var (
+	app             *config.AppConfig
+	pathToTemplates = "./templates"
+)
 
 // NewTemplates sets the config for the template package
 func NewTemplates(a *config.AppConfig) {
@@ -59,12 +63,13 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, td *mod
 	}
 }
 
+// [CreateTemplateCache creates a template cache as a map]
 func CreateTemplateCache() (map[string]*template.Template, error) {
 	// myCache := make(map[string]*template.Template)
 	myCache := map[string]*template.Template{}
 
 	// get all of the files named *.page.tmpl.html from ./templates
-	pages, err := filepath.Glob("./templates/*.page.tmpl.html")
+	pages, err := filepath.Glob(fmt.Sprintf("%s/*.page.tmpl.html", pathToTemplates))
 	if err != nil {
 		return myCache, err
 	}
@@ -79,13 +84,13 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 		}
 
 		// this will get matches if the current template uses a layout
-		matches, err := filepath.Glob("./templates/*.layout.tmpl.html")
+		matches, err := filepath.Glob(fmt.Sprintf("%s/templates/*.layout.tmpl.html", pathToTemplates))
 		if err != nil {
 			return myCache, err
 		}
 
 		if len(matches) > 0 {
-			ts, err = ts.ParseGlob("./templates/*.layout.tmpl.html")
+			ts, err = ts.ParseGlob(fmt.Sprintf("%s/templates/*.layout.tmpl.html", pathToTemplates))
 			if err != nil {
 				return myCache, err
 			}

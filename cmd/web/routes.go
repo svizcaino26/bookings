@@ -25,7 +25,7 @@ func routes(app *config.AppConfig) http.Handler {
 	mux.Get("/search-availability", handlers.Repo.Availability)
 	mux.Get("/contact", handlers.Repo.Contact)
 	mux.Get("/make-reservation", handlers.Repo.Reservation)
-	mux.Get(("/htmx"), handlers.Repo.Htmx)
+	mux.Get("/htmx", handlers.Repo.Htmx)
 	mux.Get("/reservation-summary", handlers.Repo.ReservationSummary)
 
 	// [POST ROUTES]
