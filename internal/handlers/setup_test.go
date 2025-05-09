@@ -21,7 +21,7 @@ import (
 var (
 	app             config.AppConfig
 	session         *scs.SessionManager
-	pathToTemplates = "./../../templates"
+	pathToTemplates = "../../templates"
 )
 
 func getRoutes() http.Handler {
@@ -117,13 +117,13 @@ func CreateTestTemplateCache() (map[string]*template.Template, error) {
 		}
 
 		// this will get matches if the current template uses a layout
-		matches, err := filepath.Glob(fmt.Sprintf("%s/templates/*.layout.tmpl.html", pathToTemplates))
+		matches, err := filepath.Glob(fmt.Sprintf("%s/*.layout.tmpl.html", pathToTemplates))
 		if err != nil {
 			return myCache, err
 		}
 
 		if len(matches) > 0 {
-			ts, err = ts.ParseGlob(fmt.Sprintf("%s/templates/*.layout.tmpl.html", pathToTemplates))
+			ts, err = ts.ParseGlob(fmt.Sprintf("%s/*.layout.tmpl.html", pathToTemplates))
 			if err != nil {
 				return myCache, err
 			}
